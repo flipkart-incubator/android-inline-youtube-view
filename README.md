@@ -1,6 +1,6 @@
 # inline-youtube-view
 
-YouTube component for Android, iOS and React. This is a suite of utilitiy libraries around using YouTube inside your Android, iOS or React Native app.
+YouTube component for Android, iOS and React. This is a suite of utility libraries around using YouTube inside your Android, iOS or React Native app.
 
 # youtube-android
 
@@ -12,3 +12,9 @@ Playing Youtube on Android (specially inline) comes with some challenges :
 inline-youtube-view for Android checks if the services are available and will fall back gracefully to using WebView in the event they are not. 
 
 YouTubePlayerView : The YouTubePlayerView provided by the YouTube SDK comes with a restriction that the activty hosting this needs to extend from YouTubeBaseActivity. This view removes these restrictions. 
+
+### Screenshots
+
+YouTube Activity (Fullscreen Mode)
+
+![YouTube Activity](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-android-activity.gif)
