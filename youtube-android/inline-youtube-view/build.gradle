@@ -29,6 +29,7 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        google()
         maven { url sdkDir + '/extras/android/m2repository/' }
     }
     dependencies {
