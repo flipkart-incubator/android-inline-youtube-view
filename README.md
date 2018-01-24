@@ -23,23 +23,51 @@ YouTubePlayerView : The YouTubePlayerView provided by the YouTube SDK comes with
 
 ![YouTube Fragment](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-fragment-android.gif)
 
-## How to use
+## How to use ?
 
 Add it in your root build.gradle at the end of repositories :
 
 ````java
-   allprojects {
-      repositories {
-		  ...
-		  maven { url "https://jitpack.io" }
-	   }
+allprojects {
+   repositories {
+     ...
+     maven { url "https://jitpack.io" }
    }
+}
 ````
 
 Add the dependency
 
 ````java
-	dependencies {
-	    compile 'coming_soon'
-	}
+dependencies {
+   //to be updated soon.
+}
+````
+
+### YouTubePlayer Activity
+
+Start an YouTubeActivity intent with apiKey and videoId. This will play the youtube video in a new activity in fullscreen mode.
+
+````java
+Intent intent = new Intent(MainActivity.this, YouTubeActivity.class);
+intent.putExtra("apiKey", Constants.API_KEY);
+intent.putExtra("videoId", "3AtDnEC4zak");
+startActivity(intent);
+````
+
+### YouTubePlayer Inline
+
+Create an instance of YouTubePlayerView inside a fragment. To initialize the player, you need to call the initPlayer method with following params:
+1. apiKey
+2. videoId
+3. webviewUrl : the link to iframe.html file (this is required when the device is not able to render native video, a fallback). By default, use 'https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html'
+4. playerType : native, webview or auto (try native, else fallback to webview)
+5. listener : callback listener
+6. fragment : fragment hosting this view
+7. imageLoader : to load thumbnail image
+
+````java
+YouTubePlayerView playerView = new YouTubePlayerView(context);
+playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, listener, fragment, imageLoader);
+
 ````
