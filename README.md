@@ -40,7 +40,7 @@ Add the dependency
 
 ````java
 dependencies {
-   //to be updated soon.
+   compile 'com.github.flipkart-incubator:inline-youtube-view:1.0.1'
 }
 ````
 
