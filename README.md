@@ -17,4 +17,4 @@ YouTubePlayerView : The YouTubePlayerView provided by the YouTube SDK comes with
 
 YouTube Activity (Fullscreen Mode)
 
-![YouTube Activity](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-android-activity.gif)
+![YouTube Activity](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-activity-android.gif)
