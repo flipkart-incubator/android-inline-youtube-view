@@ -13,8 +13,33 @@ inline-youtube-view for Android checks if the services are available and will fa
 
 YouTubePlayerView : The YouTubePlayerView provided by the YouTube SDK comes with a restriction that the activty hosting this needs to extend from YouTubeBaseActivity. This view removes these restrictions. 
 
-### Screenshots
+## Demo Gifs
 
-YouTube Activity (Fullscreen Mode)
+### YouTubePlayer in Activity (Fullscreen Mode)
 
 ![YouTube Activity](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-activity-android.gif)
+
+### YouTubePlayer in Fragment (inline native)
+
+![YouTube Fragment](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-fragment-android.gif)
+
+## How to use
+
+Add it in your root build.gradle at the end of repositories :
+
+````java
+   allprojects {
+      repositories {
+		  ...
+		  maven { url "https://jitpack.io" }
+	   }
+   }
+````
+
+Add the dependency
+
+````java
+	dependencies {
+	    compile 'coming_soon'
+	}
+````
