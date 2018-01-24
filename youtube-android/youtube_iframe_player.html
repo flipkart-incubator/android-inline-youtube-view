@@ -1,0 +1,239 @@
+<!--
+ Copyright 2014 Google Inc. All rights reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <style>
+    body { margin: 0; width:100%%; height:100%%;  background-color:#000000; }
+    html { width:100%%; height:100%%; background-color:#000000; }
+    .embed-container iframe,
+    .embed-container object,
+    .embed-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%% !important;
+        height: 100%% !important;
+    }
+    </style>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="https://www.youtube.com/iframe_api"
+            onerror="window.location.href='ytplayer://onYouTubeIframeAPIFailedToLoad'"></script>
+
+</head>
+
+<body>
+<div class="embed-container">
+    <div id="player"></div>
+</div>
+
+
+<script type="text/javascript">
+        var player;
+        var error = false;
+        var eventQueue = Queue();
+        function Queue() {
+           var queue = [];
+           var MAX_CALLBACK_WAIT_TIME = 200; // in ms
+           var waitingForCallback = false;
+           var waitingEventId = -1;
+           var uniqueId = 0;
+           var lastEventDispatchTime = 0;
+           function addEvent(event) {
+               if (event != undefined && event.length > 0) {
+                   queue.push(event);
+               }
+               dispatchEvent();
+           }
+           function isWaitForCallback()
+           {
+             if(waitingForCallback){
+               return ((new Date().getTime() - lastEventDispatchTime) < MAX_CALLBACK_WAIT_TIME )
+             }
+             return false;
+           }
+           function onSuccess(eventId) {
+               if (eventId == waitingEventId) {
+                   waitingForCallback = false;
+                   waitingEventId = -1;
+                   dispatchEvent();
+               }
+           }
+           function dispatchEvent() {
+               if (!isWaitForCallback()) {
+                   if (queue.length > 0) {
+                       var event = queue.shift();
+                       if (event != undefined && event.length > 0) {
+                           uniqueId++;
+                           waitingForCallback = true;
+                           waitingEventId = uniqueId;
+                           window.eventCallback = onSuccess;
+                           window.location.href = event + (event.split('?')[1] ? '&' : '?') + "callback=eventCallback(" + waitingEventId + ")";
+                           lastEventDispatchTime = new Date().getTime();
+                       }
+                   }
+               }
+           }
+           function clearQueue() {
+               queue = [];
+               waitingForCallback = false;
+           }
+           return {
+               'addEvent': addEvent,
+               'clearQueue': clearQueue
+           }
+       }
+        function clearEventQueue() {
+            eventQueue.clearQueue();
+        }
+        YT.ready(function() {
+                 player = new YT.Player('player', {
+                                        "width" : "100%",
+                                        "height" : "100%",
+                                        "events" : {
+                                        "onPlaybackQualityChange" : "onPlaybackQualityChange",
+                                        "onReady" : "onPlayerReady",
+                                        "onError" : "onPlayerError",
+                                        "onStateChange" : "onPlayerStateChange",
+                                        "onApiChange": "onPlayerApiChange",
+                                        "onPlaybackRateChange": "onPlayerPlaybackRateChange"
+                                        },
+                                        "playerVars" : {
+                                        "rel" : 0,
+                                        "showinfo" : 0,
+                                        "autoplay" : 1,
+                                        "fs" : 0,
+                                        "disablekb" : 1,
+                                        "modestbranding" : 1,
+                                        "playsinline" : 1,
+                                        "controls" : 1,
+                                        "cc_load_policy":0,
+                                        "iv_load_policy":3,
+                                        "html5": 1
+                                        }
+                                        });
+                 player.setSize(window.innerWidth, window.innerHeight);
+                 eventQueue.addEvent('ytplayer://onYouTubeIframeAPIReady?data=');
+                 });
+     function onPlayerReady(event) {
+      eventQueue.addEvent('ytplayer://onReady?data=' + event.data);
+     }
+    var timerId = 0;
+    function onPlayerStateChange(event) {
+        clearTimeout(timerId);
+        if(error) {
+            error = false;
+            return;
+        }
+        switch (event.data) {
+            case YT.PlayerState.UNSTARTED:
+            onStateChange("UNSTARTED");
+            break;
+            case YT.PlayerState.ENDED:
+            onStateChange("ENDED");
+            break;
+            case YT.PlayerState.PLAYING:
+            player.unloadModule("captions");
+            onStateChange("PLAYING");
+            timerId = setInterval(function() { setCurrentTime(); }, 500);
+            break;
+            case YT.PlayerState.PAUSED:
+            onStateChange("PAUSED");
+            break;
+            case YT.PlayerState.BUFFERING:
+            onStateChange("BUFFERING");
+            break;
+            case YT.PlayerState.CUED:
+            onStateChange("CUED");
+            break;
+        }
+    }
+    function onPlayerPlaybackQualityChange(playbackQuality) {
+        onPlaybackQualityChange(playbackQuality);
+    }
+    function onPlayerPlaybackRateChange(playbackRate) {
+        onPlaybackRateChange(playbackRate);
+    }
+    function onPlayerError(event) {
+        if (event.data == 100) {
+            error = true;
+        }
+        onError(event);
+    }
+    function onPlayerApiChange(event) {
+        onApiChange(event);
+    }
+    function onStateChange(args){
+        eventQueue.addEvent('ytplayer://onStateChange?data=' + args + '&currentTime=' + player.getCurrentTime())
+    }
+    function onPlaybackQualityChange(event){
+        eventQueue.addEvent('ytplayer://onPlaybackQualityChange?data=' + event.data)
+    }
+    function onPlaybackRateChange(event){
+        eventQueue.addEvent('ytplayer://onPlaybackRateChange?data=' + event.data);
+    }
+    function onError(event){
+       eventQueue.addEvent('ytplayer://onError?data=' + event.data)
+    }
+    function onApiChange(event){
+        eventQueue.addEvent('ytplayer://onApiChange?data=' + event.data);
+    }
+    function sendDuration(){
+        eventQueue.addEvent('ytplayer://duration?data=' + player.getDuration())
+    }
+    function setCurrentTime(){
+        eventQueue.addEvent('ytplayer://currentTime?data=' + player.getCurrentTime())
+    }
+    function setLog(msg){
+        eventQueue.addEvent('ytplayer://logs?data=' + msg)
+    }
+    function onSeekTo(startSeconds){
+        player.seekTo(startSeconds, true)
+    }
+    function onVideoPause(){
+        player.pauseVideo();
+    }
+    function onVideoStop(){
+        player.stopVideo();
+    }
+    function onVideoPlay(){
+        player.playVideo();
+    }
+    function loadVideo(videoId){
+        clearEventQueue();
+        player.loadVideoById(videoId, 0);
+    }
+    function loadVideoFrom(videoId,startSeconds){
+        clearEventQueue();
+        player.loadVideoById(videoId, startSeconds);
+    }
+
+    function cueVideo(videoId){
+        clearEventQueue();
+        player.cueVideoById(videoId, 0, "default");
+        player.setVolume(100)
+    }
+
+    window.onresize = function() {
+        player.setSize(window.innerWidth, window.innerHeight);
+    }
+</script>
+
+</body>
+</html>
