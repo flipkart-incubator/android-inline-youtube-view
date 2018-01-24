@@ -2,6 +2,8 @@
 
 YouTube component for Android, iOS and React. This is a suite of utility libraries around using YouTube inside your Android, iOS or React Native app.
 
+NOTE: WIP for iOS and react youtube library. 
+
 # youtube-android
 
 Playing Youtube on Android (specially inline) comes with some challenges :  
