@@ -1,0 +1,21 @@
+matrix:
+  include:
+    - language: android
+      jdk: oraclejdk8
+      android:
+        components:
+          - tools
+          - android-27
+          - build-tools-27.0.3
+      before_script:
+        - cd youtube-android/inline-youtube-view
+      script:
+        - ./gradlew build connectedCheck
+
+    - language: objective-c
+      os: osx
+      osx_image: xcode8.3
+
+notifications:
+  email:
+    - anirudh.r@flipkart.com
