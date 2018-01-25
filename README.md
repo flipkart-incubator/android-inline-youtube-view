@@ -1,5 +1,7 @@
 # inline-youtube-view
 
+(https://jitpack.io/v/flipkart-incubator/inline-youtube-view.svg)](https://jitpack.io/#flipkart-incubator/inline-youtube-view)
+
 YouTube component for Android, iOS and React. This is a suite of utility libraries around using YouTube inside your Android, iOS or React Native app.
 
 NOTE: WIP for iOS and react youtube library. 
