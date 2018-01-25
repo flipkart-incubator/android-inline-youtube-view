@@ -23,14 +23,10 @@ android {
 }
 
 buildscript {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    def sdkDir = properties.getProperty('sdk.dir')
     repositories {
         jcenter()
         mavenCentral()
         google()
-        maven { url sdkDir + '/extras/android/m2repository/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
