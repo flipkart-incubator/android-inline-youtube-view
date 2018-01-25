@@ -12,10 +12,6 @@ matrix:
       script:
         - ./gradlew build connectedCheck
 
-    - language: objective-c
-      os: osx
-      osx_image: xcode8.3
-
 notifications:
   email:
     - anirudh.r@flipkart.com
