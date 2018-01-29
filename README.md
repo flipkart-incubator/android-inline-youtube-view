@@ -75,3 +75,15 @@ YouTubePlayerView playerView = new YouTubePlayerView(context);
 playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, listener, fragment, imageLoader);
 
 ````
+
+# youtube-react-native
+
+To be updated soon.
+
+# youtube-ios
+
+To be updated soon.
+
+## Contributing
+
+The easiest way to contribute is by [forking the repo](https://help.github.com/articles/fork-a-repo/), making your changes and [creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
