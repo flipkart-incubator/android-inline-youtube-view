@@ -86,6 +86,7 @@ public final class YouTubeWebViewFragment extends Fragment implements YouTubeEve
         } else {
             removeWebView();
             youTubePlayerWebView.initialize(webViewUrl);
+            youTubePlayerWebView.setYouTubeListener(this);
             setWebViewProps();
             youTubePlayerWebView.onReadyPlayer();
         }
