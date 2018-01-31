@@ -28,9 +28,9 @@ import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.PlayerStateList;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.android.youtube.player.YouTubePlayerFragment;
 
-public final class YouTubeFragment extends YouTubePlayerSupportFragment implements YouTubePlayer.OnInitializedListener, YouTubeBaseFragment {
+public class YouTubeNativeFragment extends YouTubePlayerFragment implements YouTubePlayer.OnInitializedListener, YouTubeBaseFragment {
 
     private static final String ARG_VIDEO_ID = "videoId";
     private static final String ARG_API_KEY = "apiKey";
@@ -42,11 +42,11 @@ public final class YouTubeFragment extends YouTubePlayerSupportFragment implemen
     @Nullable
     private YouTubePlayer youTubePlayer;
 
-    public static YouTubeFragment newInstance(@NonNull String apiKey, @NonNull final String videoId) {
+    public static YouTubeNativeSupportFragment newInstance(@NonNull String apiKey, @NonNull final String videoId) {
         if (TextUtils.isEmpty(apiKey) || TextUtils.isEmpty(videoId)) {
             throw new IllegalStateException("VideoId and ApiKey cannot be null.");
         }
-        YouTubeFragment youTubeFragment = new YouTubeFragment();
+        YouTubeNativeSupportFragment youTubeFragment = new YouTubeNativeSupportFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ARG_VIDEO_ID, videoId);
         bundle.putString(ARG_API_KEY, apiKey);
