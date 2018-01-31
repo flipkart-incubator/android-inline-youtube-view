@@ -18,10 +18,10 @@
  */
 package com.flipkart.youtubeview.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +31,7 @@ import com.flipkart.youtubeview.R;
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.webview.YouTubePlayerWebView;
 
-public class YouTubeWebViewFragment extends Fragment implements YouTubeEventListener, YouTubeBaseFragment {
+public final class YouTubeWebViewSupportFragment extends Fragment implements YouTubeEventListener, YouTubeBaseFragment {
 
     private static final String WEB_VIEW_URL = "webViewUrl";
     private static final String VIDEO_ID = "videoId";
@@ -40,8 +40,8 @@ public class YouTubeWebViewFragment extends Fragment implements YouTubeEventList
     @Nullable
     private YouTubeEventListener youTubeEventListener;
 
-    public static YouTubeWebViewFragment newInstance(@NonNull String webViewUrl, @NonNull String videoId) {
-        YouTubeWebViewFragment youTubeWebViewFragment = new YouTubeWebViewFragment();
+    public static YouTubeWebViewSupportFragment newInstance(@NonNull String webViewUrl, @NonNull String videoId) {
+        YouTubeWebViewSupportFragment youTubeWebViewFragment = new YouTubeWebViewSupportFragment();
         Bundle bundle = new Bundle();
         bundle.putString(WEB_VIEW_URL, webViewUrl);
         bundle.putString(VIDEO_ID, videoId);

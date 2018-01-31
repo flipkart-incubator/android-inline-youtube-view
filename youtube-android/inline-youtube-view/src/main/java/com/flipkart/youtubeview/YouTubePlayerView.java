@@ -38,7 +38,7 @@ import android.widget.ProgressBar;
 
 import com.flipkart.youtubeview.fragment.YouTubeBaseFragment;
 import com.flipkart.youtubeview.fragment.YouTubeNativeSupportFragment;
-import com.flipkart.youtubeview.fragment.YouTubeWebViewFragment;
+import com.flipkart.youtubeview.fragment.YouTubeWebViewSupportFragment;
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.ImageLoader;
 import com.flipkart.youtubeview.models.YouTubePlayerType;
@@ -198,9 +198,9 @@ public class YouTubePlayerView extends FrameLayout {
             if (isNative) {
                 youtubePlayerFragment = YouTubeNativeSupportFragment.newInstance(key, videoId);
             } else {
-                YouTubeWebViewFragment webViewFragment = YouTubeWebViewFragment.newInstance(webViewUrl, videoId);
-                if (currentYouTubeFragment instanceof YouTubeWebViewFragment) {
-                    webViewFragment.setWebView(((YouTubeWebViewFragment) currentYouTubeFragment).removeWebView());
+                YouTubeWebViewSupportFragment webViewFragment = YouTubeWebViewSupportFragment.newInstance(webViewUrl, videoId);
+                if (currentYouTubeFragment instanceof YouTubeWebViewSupportFragment) {
+                    webViewFragment.setWebView(((YouTubeWebViewSupportFragment) currentYouTubeFragment).removeWebView());
                 }
                 youtubePlayerFragment = webViewFragment;
             }
