@@ -36,7 +36,7 @@ CGFloat const PLAY_ICON_DIMENSION = 48;
     self.playIconView = [[UIImageView alloc] initWithImage:playIconImage];
     [self.playIconView setFrame:CGRectMake(self.thumbnailView.bounds.size.width/2 - PLAY_ICON_DIMENSION/2, self.thumbnailView.bounds.size.height/2 - PLAY_ICON_DIMENSION/2, PLAY_ICON_DIMENSION, PLAY_ICON_DIMENSION)];
     [self.thumbnailView addSubview:self.playIconView];
-
+    
     [self addSubview:self.thumbnailView];
     
     NSString *urlString = [NSString stringWithFormat:@"https://img.youtube.com/vi/%@/hqdefault.jpg", videoId];
@@ -54,7 +54,7 @@ CGFloat const PLAY_ICON_DIMENSION = 48;
                    });
     return self;
 }
-
+    
     
 -(void) playButtonClicked {
     [self.playIconView removeFromSuperview];
@@ -87,25 +87,47 @@ CGFloat const PLAY_ICON_DIMENSION = 48;
 }
     
 - (void)playerView:(nonnull InlineYoutubeView *)playerView didChangeToState:(YTPlayerState)state {
-    
+    switch (state) {
+        case kYTPlayerStateUnknown:
+        NSLog(@"Unknown state");
+        break;
+        case kYTPlayerStateUnstarted:
+        NSLog(@"Video Unstarted");
+        break;
+        case kYTPlayerStateQueued:
+        NSLog(@"Video Queued");
+        break;
+        case kYTPlayerStateBuffering:
+        NSLog(@"Video buffering");
+        break;
+        case kYTPlayerStatePlaying:
+        NSLog(@"Video started playing");
+        break;
+        case kYTPlayerStatePaused:
+        NSLog(@"Video paused");
+        break;
+        case kYTPlayerStateEnded:
+        NSLog(@"Video ended");
+        break;
+    }
 }
     
 - (void)playerView:(nonnull InlineYoutubeView *)playerView didChangeToQuality:(YTPlaybackQuality)quality {
-    
+    NSLog(@"Quality changed");
 }
     
 - (void)playerView:(nonnull InlineYoutubeView *)playerView receivedError:(YTPlayerError)error {
-    
+    NSLog(@"Received error");
 }
     
 - (void)playerView:(nonnull InlineYoutubeView *)playerView didPlayTime:(float)playTime {
     
+    //Getting the duration through a completion block
+    [playerView getDuration:^(NSTimeInterval duration, NSError * _Nullable error) {
+        NSLog(@"currentTime %f", playTime);
+        NSLog(@"totalDuration %f", duration);
+    }];
 }
-    
-- (void)playerView:(nonnull InlineYoutubeView *)playerView duration:(NSTimeInterval)duration {
-    
-}
-
-    
     
     @end
+
