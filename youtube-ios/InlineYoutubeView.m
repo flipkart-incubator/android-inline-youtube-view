@@ -177,7 +177,6 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     NSString *qualityValue = [InlineYoutubeView stringForPlaybackQuality:suggestedQuality];
     NSString *command = [NSString stringWithFormat:@"loadVideo('%@');",
                          videoId];
-    
     [self getStringFromEvaluatingJavaScript:command completionHandler:nil];
 }
     
