@@ -99,15 +99,13 @@ CGFloat const PLAY_ICON_DIMENSION = 48;
         self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:FULLSCREEN];
     }
     
-    self.youtubeView.frame = self.bounds;
+    self.youtubeView.frame = self.thumbnailView.frame;
     self.youtubeView.delegate = self;
 }
     
 /*
  InlineYoutubeView callbacks
  */
-
-    
 - (void)playerViewDidBecomeReady:(nonnull InlineYoutubeView *)playerView {
     [self removeLoaderFromThumbnail];
     [self loadVideo:playerView];
@@ -117,7 +115,6 @@ CGFloat const PLAY_ICON_DIMENSION = 48;
     [self.loaderView stopAnimating];
     [self.loaderView removeFromSuperview];
 }
-    
     
 -(void) loadVideo: (nonnull InlineYoutubeView *)playerView {
     [self addSubview:playerView];
