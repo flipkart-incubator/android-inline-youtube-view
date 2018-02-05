@@ -59,6 +59,12 @@ intent.putExtra("videoId", "3AtDnEC4zak");
 startActivity(intent);
 ````
 
+Also, make sure that you add the activity in the AndroidManifest.xml file.
+
+````java
+<activity android:name="com.flipkart.youtubeview.activity.YouTubeActivity" />
+````
+
 ### YouTubePlayer Inline
 
 Create an instance of YouTubePlayerView inside a fragment. To initialize the player, you need to call the initPlayer method with following params:
