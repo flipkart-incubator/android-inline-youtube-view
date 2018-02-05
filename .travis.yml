@@ -5,8 +5,12 @@ matrix:
       android:
         components:
           - tools
-          - android-27
+          - platform-tools
           - build-tools-27.0.3
+          - android-27
+          - extra-android-support
+          - extra-android-m2repository
+          - extra-google-m2repository
       before_script:
         - cd youtube-android/inline-youtube-view
       script:
