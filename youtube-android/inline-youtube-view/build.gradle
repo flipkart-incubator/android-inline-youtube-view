@@ -46,10 +46,8 @@ allprojects {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile files('libs/YouTubeAndroidPlayerApi-1.2.2.jar')
-
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation files('libs/YouTubeAndroidPlayerApi-1.2.2.jar')
 }
 
 apply plugin: 'maven-publish'
