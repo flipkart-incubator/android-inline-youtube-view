@@ -1,0 +1,16 @@
+PODS:
+  - InlineYoutubeView (0.1.0)
+
+DEPENDENCIES:
+  - InlineYoutubeView (from `../`)
+
+EXTERNAL SOURCES:
+  InlineYoutubeView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  InlineYoutubeView: 91826695a903b7e289fdd85ce52355126c9dd30f
+
+PODFILE CHECKSUM: 64cdb2da38bfe9b24d4a4e85f266a4d99f55d6c8
+
+COCOAPODS: 1.4.0
