@@ -15,8 +15,7 @@ Pod::Spec.new do |s|
   your Objective-C code
                     DESC
 
-  s.homepage         = 'https://github.com/shubhankaryash/InlineYoutubeView'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/flipkart-incubator/inline-youtube-view'
   s.license          = { :type => 'Apache, Version 2.0', :file => 'LICENSE' }
   s.author           = { 'shubhankaryash' => 'shubhankar.yash@flipkart.com' }
   s.source           = { :git => 'https://github.com/flipkart-incubator/inline-youtube-view.git', :tag => s.version.to_s }
