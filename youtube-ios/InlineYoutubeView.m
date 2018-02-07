@@ -74,18 +74,18 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     
     @property (nonatomic, strong) NSURL *originURL;
     @property (nonatomic, weak) UIView *initialLoadingView;
-    @property(nonatomic,strong) NSURL *htmlUrl;
-    @property(nonatomic,strong) NSString *playerMode;
+    @property(nonatomic, strong) NSURL *htmlUrl;
+    @property(nonatomic, assign) YTPlayerMode videoPlayerMode;
     @property(assign) BOOL isYTPlayerLoaded;
     
     @end
 
 @implementation InlineYoutubeView
     
--(id)initWithHtmlUrl:(NSString *)htmlUrl andVideoPlayerMode:(NSString *)playerMode {
+-(id)initWithHtmlUrl:(NSString *)htmlUrl andVideoPlayerMode:(YTPlayerMode)videoPlayerMode {
     if(self = [super init]) {
         self.htmlUrl=[NSURL URLWithString:htmlUrl];
-        self.playerMode = playerMode;
+        self.videoPlayerMode = videoPlayerMode;
     }
     return self;
 }
@@ -611,19 +611,15 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
         decisionHandler(WKNavigationActionPolicyAllow);
     }
     
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
-    {
-        if (self.initialLoadingView) {
-            [self.initialLoadingView removeFromSuperview];
-        }
-        if(error.code==NETWORK_OFFLINE_ERROR_CODE){
-            [self.delegate playerView:self receivedError:kYTErrorNetworkOffline];
-        }
-        else{
-            [self.delegate playerView:self receivedError:kYTPlayerErrorUnknown];
-        }
-    }
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error{
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+    [self giveCallbackForError:error];
+}
+    
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    [self giveCallbackForError:error];
+}
+    
+-(void)giveCallbackForError:(NSError *)error {
     if (self.initialLoadingView) {
         [self.initialLoadingView removeFromSuperview];
     }
@@ -1213,9 +1209,11 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     
     
-    BOOL shouldPlayInline = YES;
-    if ([self.playerMode isEqualToString: @"FULLSCREEN"]) {
+    BOOL shouldPlayInline;
+    if (self.videoPlayerMode == kYTPlayerModeFullScreen) {
         shouldPlayInline = NO;
+    } else {
+        shouldPlayInline = YES;
     }
     
     [webViewConfiguration setAllowsInlineMediaPlayback: shouldPlayInline];

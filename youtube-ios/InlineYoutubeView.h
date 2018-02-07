@@ -17,6 +17,11 @@
 
 @class InlineYoutubeView;
 
+typedef NS_ENUM(NSInteger, YTPlayerMode) {
+    kYTPlayerModeInline,
+    kYTPlayerModeFullScreen
+};
+
 /** These enums represent the state of the current video in the player. */
 typedef NS_ENUM(NSInteger, YTPlayerState) {
     kYTPlayerStateUnstarted,
@@ -152,8 +157,8 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
     /** A delegate to be notified on playback events. */
     @property(nonatomic, weak, nullable) id<InlineYoutubeViewDelegate> delegate;
     
--(id)initWithHtmlUrl:(NSString *)htmlUrl andVideoPlayerMode:(NSString *)playerMode;
-    
+-(id)initWithHtmlUrl:(NSString *)htmlUrl andVideoPlayerMode:(YTPlayerMode)videoPlayerMode;
+
     
     /**
      * This method loads the player with the given video ID.

@@ -5,11 +5,23 @@
 [![License](https://img.shields.io/cocoapods/l/InlineYoutubeView.svg?style=flat)](http://cocoapods.org/pods/InlineYoutubeView)
 [![Platform](https://img.shields.io/cocoapods/p/InlineYoutubeView.svg?style=flat)](http://cocoapods.org/pods/InlineYoutubeView)
 
+## About
+This pod is a modification of the youtube-ios-helper provided by youtube. Modifications include
+1) Migration to WkWebView from the older UIWebView. WKWebView is run in a separate process to your app so that it can draw on native Safari JavaScript optimizations. This means WKWebView loads web pages faster and more efficiently than UIWebView, and also doesn't have as much memory overhead for you. Quoting the Apple documentation - "Starting in iOS 8.0 and OS X 10.10, use WKWebView to add web content to your app. Do not use UIWebView or WebView."
+2) Adding support for custom html urls. Earlier we could only use the html in the resource bundle
+3) Adding parameter for deciding whether to play the videos inline or fullscreen.
+4) Adding error callback for when network is offline after iframeAPI has been loaded.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+## Screenshots
+
+Inline Youtube videos <br />
+<img src="Screenshots/InlineYoutube.gif" width="400" height="700">
+
+
 
 ## Installation
 
@@ -33,17 +45,14 @@ Create an object of the InlineYoutubeView
 ```
 Initialise the Inline youtube view
 ```objective-c
-NSString *const INLINE = @"INLINE";
-NSString *const FULLSCREEN = @"FULLSCREEN";
-
 //The url where the HTML is hosted. You can have any custom HTML url as well. So you can modify the iframe provided, upload the modified HTML file and use the url here
 NSString *const HTML_URL = @"https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html";
 
 //Incase you need your youtube view to open inline
-self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:INLINE];
+self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:kYTPlayerModeInline];
 
 //Incase you need your youtube view to open in fullscreen
-self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:FULLSCREEN];
+self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:kYTPlayerModeFullScreen];
 ```
 Set the delegate of the youtube view to self. This will ensure that you start receiving all the InlineYoutubeView callbacks
 ```objective-c

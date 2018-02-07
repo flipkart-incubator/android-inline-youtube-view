@@ -5,13 +5,21 @@
 //  Created by SHUBHANKAR YASH on 31/01/18.
 //  Copyright © 2018 shubhankaryash. All rights reserved.
 //
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
 
 #import <Foundation/Foundation.h>
 #import "YTVideoCell.h"
-
-//Constants which decide whether to play the video inline or in fullscreen
-NSString *const INLINE = @"INLINE";
-NSString *const FULLSCREEN = @"FULLSCREEN";
 
 //The url where the HTML is hosted
 NSString *const HTML_URL = @"https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html";
@@ -94,9 +102,9 @@ CGFloat const PLAY_ICON_DIMENSION = 48;
     
 -(void)setupYoutubeView {
     if(_playInline) {
-        self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:INLINE];
+        self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:kYTPlayerModeInline];
     } else {
-        self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:FULLSCREEN];
+        self.youtubeView = [[InlineYoutubeView alloc] initWithHtmlUrl:HTML_URL andVideoPlayerMode:kYTPlayerModeFullScreen];
     }
     
     self.youtubeView.frame = self.thumbnailView.frame;
