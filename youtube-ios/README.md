@@ -97,4 +97,4 @@ shubhankaryash, shubhankar.yash@flipkart.com
 
 ## License
 
-InlineYoutubeView is available under the Apache 2.0 license. See the LICENSE file for more info.
+InlineYoutubeView is available under the Apache 2.0 license. The pod files are a modification of the work done by Google and has their license. However the Example project belongs to the Flipkart license.  See the LICENSE file for more info.
