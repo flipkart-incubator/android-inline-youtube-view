@@ -2,8 +2,8 @@
 //  main.m
 //  InlineYoutubeView
 //
-//  Created by shubhankaryash on 01/31/2018.
-//  Copyright © 2018 flipkart.com. All rights reserved.
+//  Created by SHUBHANKAR YASH on 31/01/18.
+//  Copyright 2018 Flipkart Internet Pvt. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
