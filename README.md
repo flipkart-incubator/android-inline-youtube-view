@@ -76,11 +76,31 @@ playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipka
 
 ````
 
-# youtube-react-native
-
-To be updated soon.
-
 # youtube-ios
+
+This pod is a modification of the youtube-ios-helper provided by youtube. Modifications include
+
+* Migration to WkWebView from the older UIWebView.
+* Adding support for custom html urls. Earlier we could only use the html in the resource bundle
+* Adding parameter for deciding whether to play the videos inline or fullscreen.
+* Adding error callback for when network is offline after iframeAPI has been loaded.
+
+## Demo Gif
+
+![YouTube iOS](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-view-ios.gif)
+
+## Installation
+
+InlineYoutubeView is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
+
+```ruby
+pod 'InlineYoutubeView'
+```
+## How to use ?
+
+Refer to [iOS README](https://github.com/flipkart-incubator/inline-youtube-view/edit/ios/youtube-ios/README.md)
+
+# youtube-react-native
 
 To be updated soon.
 
