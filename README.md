@@ -4,8 +4,6 @@
 
 YouTube component for Android, iOS and React. This is a suite of utility libraries around using YouTube inside your Android, iOS or React Native app.
 
-NOTE: WIP for iOS and react youtube library. 
-
 # youtube-android
 
 Playing Youtube on Android (specially inline) comes with some challenges :  
@@ -81,34 +79,6 @@ YouTubePlayerView playerView = new YouTubePlayerView(context);
 playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, listener, fragment, imageLoader);
 
 ````
-
-# youtube-ios
-
-This pod is a modification of the youtube-ios-helper provided by youtube. Modifications include
-
-* Migration to WkWebView from the older UIWebView.
-* Adding support for custom html urls. Earlier we could only use the html in the resource bundle
-* Adding parameter for deciding whether to play the videos inline or fullscreen.
-* Adding error callback for when network is offline after iframeAPI has been loaded.
-
-## Demo Gif
-
-![YouTube iOS](https://github.com/flipkart-incubator/inline-youtube-view/blob/master/youtube-view-ios.gif)
-
-## Installation
-
-InlineYoutubeView is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
-
-```ruby
-pod 'InlineYoutubeView'
-```
-## How to use ?
-
-Refer to [iOS README](https://github.com/flipkart-incubator/inline-youtube-view/edit/ios/youtube-ios/README.md)
-
-# youtube-react-native
-
-To be updated soon.
 
 ## Contributing
 
