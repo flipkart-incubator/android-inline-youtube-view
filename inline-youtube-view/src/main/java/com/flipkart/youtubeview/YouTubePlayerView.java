@@ -43,25 +43,19 @@ import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.ImageLoader;
 import com.flipkart.youtubeview.models.YouTubePlayerType;
 import com.flipkart.youtubeview.util.ServiceUtil;
+import com.flipkart.youtubeview.util.VideoConfig;
 
 public class YouTubePlayerView extends FrameLayout {
 
     public static final String TAG = "YouTubeFragmentTAG";
     private static final double ASPECT_RATIO = 0.5625; //aspect ratio of player 9:16(height/width)
-
     protected ImageView playIcon;
-    @YouTubePlayerType
-    private int playerType;
-
-    private String videoId;
     @Nullable
     private YouTubeEventListener listener;
     private Fragment fragment;
-
-    private String key;
+    private VideoConfig videoConfig;
     private FrameLayout playerContainer;
     private ImageView thumbnailImageView;
-    private String webViewUrl;
     private ImageLoader imageLoader;
 
     public YouTubePlayerView(Context context) {
@@ -93,7 +87,11 @@ public class YouTubePlayerView extends FrameLayout {
             layoutParams.height = newHeight;
             playerContainer.setLayoutParams(layoutParams);
 
-            String url = "https://img.youtube.com/vi/" + videoId + "/0.jpg";
+            String url = videoConfig.thumbnailUrl;
+            if (url == null) {
+                url = "https://img.youtube.com/vi/" + videoConfig.videoId + "/0.jpg";
+            }
+
             if (null != imageLoader) {
                 imageLoader.loadImage(thumbnailImageView, url, getMeasuredHeight(), getMeasuredWidth());
             }
@@ -101,9 +99,8 @@ public class YouTubePlayerView extends FrameLayout {
     }
 
     @MainThread
-    public void initPlayer(@NonNull String apiKey, @NonNull String videoId, @Nullable String webViewUrl, @YouTubePlayerType int playerType,
-                           @Nullable YouTubeEventListener listener, @NonNull Fragment fragment, @NonNull ImageLoader imageLoader) {
-        if (TextUtils.isEmpty(videoId) || TextUtils.isEmpty(apiKey)) {
+    public void initPlayer(@NonNull VideoConfig videoConfig, @Nullable YouTubeEventListener listener, @NonNull Fragment fragment, @NonNull ImageLoader imageLoader) {
+        if (TextUtils.isEmpty(videoConfig.videoId) || TextUtils.isEmpty(videoConfig.apiKey)) {
             throw new IllegalArgumentException("Video Id or key cannot be null");
         }
 
@@ -117,10 +114,7 @@ public class YouTubePlayerView extends FrameLayout {
             throw new IllegalArgumentException("ImageLoader cannot be null");
         }
 
-        this.key = apiKey;
-        this.videoId = videoId;
-        this.webViewUrl = webViewUrl;
-        this.playerType = playerType;
+        this.videoConfig = videoConfig;
         this.listener = listener;
         this.fragment = fragment;
         this.imageLoader = imageLoader;
@@ -163,7 +157,7 @@ public class YouTubePlayerView extends FrameLayout {
     }
 
     private void handleBindPlayer() {
-        switch (playerType) {
+        switch (videoConfig.playerType) {
             case YouTubePlayerType.WEB_VIEW:
                 attachPlayer(false);
                 break;
@@ -196,9 +190,9 @@ public class YouTubePlayerView extends FrameLayout {
             playerContainer.setId(R.id.youtubeFragmentContainer);
             YouTubeBaseFragment youtubePlayerFragment;
             if (isNative) {
-                youtubePlayerFragment = YouTubeFragment.newInstance(key, videoId);
+                youtubePlayerFragment = YouTubeFragment.newInstance(videoConfig.apiKey, videoConfig.videoId);
             } else {
-                YouTubeWebViewFragment webViewFragment = YouTubeWebViewFragment.newInstance(webViewUrl, videoId);
+                YouTubeWebViewFragment webViewFragment = YouTubeWebViewFragment.newInstance(videoConfig.webViewUrl, videoConfig.videoId);
                 if (currentYouTubeFragment instanceof YouTubeWebViewFragment) {
                     webViewFragment.setWebView(((YouTubeWebViewFragment) currentYouTubeFragment).removeWebView());
                 }

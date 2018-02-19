@@ -59,7 +59,7 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         YouTubePlayerView playerView = holder.playerView;
         String videoId = videoIds.get(position);
 
-        playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, null, fragment, imageLoader);
+//        playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, null, fragment, imageLoader);
     }
 
     public static class YouTubePlayerViewHolder extends RecyclerView.ViewHolder {
