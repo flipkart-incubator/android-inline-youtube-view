@@ -80,6 +80,10 @@ playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipka
 
 ````
 
+## YouTube iOS Player
+
+We have open-sourced the inline-youtube-player for [iOS](https://github.com/flipkart-incubator/ios-inline-youtube-view) also.
+
 ## Contributing
 
 The easiest way to contribute is by [forking the repo](https://help.github.com/articles/fork-a-repo/), making your changes and [creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
