@@ -79,13 +79,6 @@ public class YouTubePlayerView extends FrameLayout {
         int newWidth = getMeasuredWidth();
         int newHeight = (int) (newWidth * ASPECT_RATIO);
         setMeasuredDimension(newWidth, newHeight);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        int newWidth = getMeasuredWidth();
-        int newHeight = (int) (newWidth * ASPECT_RATIO);
 
         if (playerContainer != null && playerContainer.getMeasuredHeight() != newHeight) {
             ViewGroup.LayoutParams layoutParams = playerContainer.getLayoutParams();
@@ -123,6 +116,7 @@ public class YouTubePlayerView extends FrameLayout {
         this.listener = listener;
         this.fragment = fragment;
         this.imageLoader = imageLoader;
+        requestLayout();
     }
 
     private void init(@NonNull Context context) {
