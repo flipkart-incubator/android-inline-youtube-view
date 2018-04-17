@@ -29,7 +29,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:2.2.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
@@ -46,7 +46,7 @@ allprojects {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation files('libs/YouTubeAndroidPlayerApi-1.2.2.jar')
 }
 
