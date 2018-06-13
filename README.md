@@ -42,7 +42,7 @@ Add the dependency
 
 ````java
 dependencies {
-   compile 'com.github.flipkart-incubator:inline-youtube-view:1.0.1'
+	implementation 'com.github.flipkart-incubator:android-inline-youtube-view:1.0.2'
 }
 ````
 
