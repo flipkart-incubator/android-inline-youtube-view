@@ -37,6 +37,7 @@ import android.webkit.WebViewClient;
 import com.flipkart.youtubeview.BuildConfig;
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.PlayerStateList;
+import com.flipkart.youtubeview.util.$Precondition$Check;
 
 public class YouTubePlayerWebView extends WebView {
 
@@ -76,10 +77,7 @@ public class YouTubePlayerWebView extends WebView {
     }
 
     public void initialize(@NonNull String webViewUrl) {
-        if (TextUtils.isEmpty(webViewUrl)) {
-            throw new IllegalArgumentException("WebView url cannot be empty");
-        }
-
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(webViewUrl), "WebView url cannot be empty");
         if (!isPlayerReady) {
             initWebView(webViewUrl);
         }

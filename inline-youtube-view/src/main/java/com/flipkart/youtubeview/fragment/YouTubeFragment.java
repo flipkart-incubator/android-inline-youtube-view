@@ -26,6 +26,7 @@ import android.text.TextUtils;
 
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.PlayerStateList;
+import com.flipkart.youtubeview.util.$Precondition$Check;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
@@ -43,15 +44,14 @@ public final class YouTubeFragment extends YouTubePlayerSupportFragment implemen
     private YouTubePlayer youTubePlayer;
 
     public static YouTubeFragment newInstance(@NonNull String apiKey, @NonNull final String videoId) {
-        if (TextUtils.isEmpty(apiKey) || TextUtils.isEmpty(videoId)) {
-            throw new IllegalStateException("VideoId and ApiKey cannot be null.");
-        }
-        YouTubeFragment youTubeFragment = new YouTubeFragment();
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(apiKey), "apiKey cannot be null");
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(videoId), "videoId cannot be null");
+        YouTubeFragment fragment = new YouTubeFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ARG_VIDEO_ID, videoId);
         bundle.putString(ARG_API_KEY, apiKey);
-        youTubeFragment.setArguments(bundle);
-        return youTubeFragment;
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

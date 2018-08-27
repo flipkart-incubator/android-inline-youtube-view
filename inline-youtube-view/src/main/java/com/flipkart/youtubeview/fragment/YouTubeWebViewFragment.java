@@ -41,12 +41,12 @@ public final class YouTubeWebViewFragment extends Fragment implements YouTubeEve
     private YouTubeEventListener youTubeEventListener;
 
     public static YouTubeWebViewFragment newInstance(@NonNull String webViewUrl, @NonNull String videoId) {
-        YouTubeWebViewFragment youTubeWebViewFragment = new YouTubeWebViewFragment();
+        YouTubeWebViewFragment fragment = new YouTubeWebViewFragment();
         Bundle bundle = new Bundle();
         bundle.putString(WEB_VIEW_URL, webViewUrl);
         bundle.putString(VIDEO_ID, videoId);
-        youTubeWebViewFragment.setArguments(bundle);
-        return youTubeWebViewFragment;
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override

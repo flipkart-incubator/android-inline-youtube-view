@@ -37,6 +37,7 @@ import android.widget.ProgressBar;
 import com.flipkart.youtubeview.R;
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.PlayerStateList;
+import com.flipkart.youtubeview.util.$Precondition$Check;
 import com.flipkart.youtubeview.util.ServiceUtil;
 import com.flipkart.youtubeview.webview.YouTubePlayerWebView;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -86,9 +87,8 @@ public final class YouTubeActivity extends YouTubeBaseActivity implements YouTub
          * In case videoId or apiKey is null, throw IllegalStateException as apiKey and videoId is mandatory to run
          * youtube activity.
          */
-        if (TextUtils.isEmpty(videoId) || TextUtils.isEmpty(apiKey)) {
-            throw new IllegalStateException("VideoId and ApiKey cannot be null.");
-        }
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(videoId), " videoId cannot be null");
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(apiKey), " apiKey cannot be null");
 
         /*
          * In case of YouTube Service not available, fallback to WebView implementation.
