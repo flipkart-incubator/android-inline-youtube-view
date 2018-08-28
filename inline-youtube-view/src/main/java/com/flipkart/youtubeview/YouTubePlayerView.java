@@ -42,6 +42,7 @@ import com.flipkart.youtubeview.fragment.YouTubeWebViewFragment;
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.ImageLoader;
 import com.flipkart.youtubeview.models.YouTubePlayerType;
+import com.flipkart.youtubeview.util.$Precondition$Check;
 import com.flipkart.youtubeview.util.ServiceUtil;
 
 public class YouTubePlayerView extends FrameLayout {
@@ -82,7 +83,6 @@ public class YouTubePlayerView extends FrameLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
         int newWidth;
         int newHeight;
         newWidth = getMeasuredWidth();
@@ -103,19 +103,12 @@ public class YouTubePlayerView extends FrameLayout {
     @MainThread
     public void initPlayer(@NonNull String apiKey, @NonNull String videoId, @Nullable String webViewUrl, @YouTubePlayerType int playerType,
                            @Nullable YouTubeEventListener listener, @NonNull Fragment fragment, @NonNull ImageLoader imageLoader) {
-        if (TextUtils.isEmpty(videoId) || TextUtils.isEmpty(apiKey)) {
-            throw new IllegalArgumentException("Video Id or key cannot be null");
-        }
-
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(apiKey), "apiKey cannot be null");
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(videoId), "videoId cannot be null");
         //noinspection ConstantConditions
-        if (fragment == null) {
-            throw new IllegalArgumentException("Fragment cannot be null");
-        }
-
+        $Precondition$Check.checkArgument(fragment != null, "Fragment cannot be null");
         //noinspection ConstantConditions
-        if (imageLoader == null) {
-            throw new IllegalArgumentException("ImageLoader cannot be null");
-        }
+        $Precondition$Check.checkArgument(imageLoader != null, "ImageLoader cannot be null");
 
         this.key = apiKey;
         this.videoId = videoId;
@@ -204,9 +197,7 @@ public class YouTubePlayerView extends FrameLayout {
                 }
                 youtubePlayerFragment = webViewFragment;
             }
-
             youtubePlayerFragment.setYouTubeEventListener(listener);
-
             this.fragment.getChildFragmentManager().beginTransaction().add(R.id.youtubeFragmentContainer, (Fragment) youtubePlayerFragment, TAG)
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .commit();
