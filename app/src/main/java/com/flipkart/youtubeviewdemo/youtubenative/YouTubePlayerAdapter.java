@@ -1,6 +1,23 @@
+/*
+ * Apache License
+ * Version 2.0, January 2004
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+ *
+ * Copyright (c) 2018 Flipkart Internet Pvt. Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+ * this file except in compliance with the License. You may obtain a copy of the
+ * License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed
+ * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
 package com.flipkart.youtubeviewdemo.youtubenative;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +37,6 @@ import java.util.ArrayList;
 public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdapter.YouTubePlayerViewHolder> {
 
     private ArrayList<String> videoIds;
-    private Context context;
     private Fragment fragment;
     private int playerType;
 
@@ -31,8 +47,7 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         }
     };
 
-    public YouTubePlayerAdapter(Context context, ArrayList<String> contents, Fragment fragment, int playerType) {
-        this.context = context;
+    YouTubePlayerAdapter(ArrayList<String> contents, Fragment fragment, int playerType) {
         this.videoIds = contents;
         this.fragment = fragment;
         this.playerType = playerType;
@@ -43,8 +58,9 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         return videoIds.size();
     }
 
+    @NonNull
     @Override
-    public YouTubePlayerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public YouTubePlayerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.youtube_player, parent, false);
         return new YouTubePlayerViewHolder(view);
     }
@@ -55,17 +71,17 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
     }
 
     @Override
-    public void onBindViewHolder(final YouTubePlayerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final YouTubePlayerViewHolder holder, int position) {
         YouTubePlayerView playerView = holder.playerView;
         String videoId = videoIds.get(position);
 
         playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, null, fragment, imageLoader);
     }
 
-    public static class YouTubePlayerViewHolder extends RecyclerView.ViewHolder {
-        public YouTubePlayerView playerView;
+    static class YouTubePlayerViewHolder extends RecyclerView.ViewHolder {
+        YouTubePlayerView playerView;
 
-        public YouTubePlayerViewHolder(View view) {
+        YouTubePlayerViewHolder(View view) {
             super(view);
             playerView = view.findViewById(R.id.youtube_player_view);
         }
