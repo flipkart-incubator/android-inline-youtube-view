@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import com.flipkart.youtubeview.activity.YouTubeActivity;
 import com.flipkart.youtubeview.models.YouTubePlayerType;
@@ -37,10 +36,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button singleYoutubePlayerButton = (Button) findViewById(R.id.singleYoutubePlayer);
-        Button youtubeNativeFragmentButton = (Button) findViewById(R.id.youtubeNativeFragment);
-        Button youtubeWebViewFragmentButton = (Button) findViewById(R.id.youtubeWebviewFragment);
-        final RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
+        Button singleYoutubePlayerButton = findViewById(R.id.singleYoutubePlayer);
+        Button youtubeNativeFragmentButton = findViewById(R.id.youtubeNativeFragment);
+        Button youtubeWebViewFragmentButton = findViewById(R.id.youtubeWebviewFragment);
 
         singleYoutubePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
