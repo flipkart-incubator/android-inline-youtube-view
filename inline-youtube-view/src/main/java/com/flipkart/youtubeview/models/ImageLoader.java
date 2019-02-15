@@ -18,7 +18,7 @@
  */
 package com.flipkart.youtubeview.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.ImageView;
 
 public interface ImageLoader {
