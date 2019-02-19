@@ -19,9 +19,9 @@
 package com.flipkart.youtubeview.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.flipkart.youtubeview.listener.YouTubeEventListener;

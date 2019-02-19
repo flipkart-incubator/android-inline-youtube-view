@@ -18,7 +18,7 @@
  */
 package com.flipkart.youtubeview.listener;
 
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 public interface YouTubeEventListener {
 

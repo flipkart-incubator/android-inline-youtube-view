@@ -18,7 +18,7 @@
  */
 package com.flipkart.youtubeview.fragment;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 
