@@ -18,13 +18,14 @@
  */
 package com.flipkart.youtubeviewdemo.youtubenative;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.flipkart.youtubeview.YouTubePlayerView;
 import com.flipkart.youtubeview.models.ImageLoader;
@@ -76,6 +77,13 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         String videoId = videoIds.get(position);
 
         playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, null, fragment, imageLoader);
+        /*if you want to have your custom icon instead of default icon. Use the below code
+            and add your own image as below. Make sure to call below method after initPlayer
+         */
+        //playerView.overridePlayIcon("https://i.ibb.co/ZKZ2qdc/ic-launcher.png");
+
+        //if you have the resource id then pass it as below
+        //playerView.overridePlayIcon(R.mipmap.ic_launcher);
     }
 
     static class YouTubePlayerViewHolder extends RecyclerView.ViewHolder {

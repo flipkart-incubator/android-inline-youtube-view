@@ -21,11 +21,6 @@ package com.flipkart.youtubeview;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Build;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -35,6 +30,13 @@ import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.flipkart.youtubeview.fragment.YouTubeBaseFragment;
 import com.flipkart.youtubeview.fragment.YouTubeFragment;
@@ -127,7 +129,6 @@ public class YouTubePlayerView extends FrameLayout {
         playerContainer.setId(0);
         thumbnailImageView = itemView.findViewById(R.id.video_thumbnail_image);
         playIcon = itemView.findViewById(R.id.play_btn);
-
         ProgressBar progressBar = itemView.findViewById(R.id.recycler_progressbar);
         // For else case there is a layout defined for v21 and above
         if (progressBar != null && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -233,4 +234,32 @@ public class YouTubePlayerView extends FrameLayout {
         unbindPlayer();
         super.onDetachedFromWindow();
     }
+
+    /**
+     * this function helps to configure the play icon image
+     *
+     * @param resId the resource identifier of the drawable
+     **/
+    public void overridePlayIcon(@DrawableRes int src) {
+        if (playIcon != null) {
+            playIcon.setImageResource(src);
+        }
+    }
+
+    /**
+     * this function helps to configure the play icon image
+     *
+     * @param imageUrl the resource identifier of the drawable
+     **/
+    public void overridePlayIcon(@NonNull String url) {
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(url), "Image Url cannot be null");
+        $Precondition$Check.checkArgument(!(imageLoader == null),
+                "Image loader cannot be null. Make sure you have called initPlayer method");
+        // override play icon
+        if (playIcon != null) {
+            int playIconDimen = (int) getContext().getResources().getDimension(R.dimen.play_icon_dimensions);
+            imageLoader.loadImage(playIcon, url, playIconDimen, playIconDimen);
+        }
+    }
+
 }
