@@ -21,11 +21,6 @@ package com.flipkart.youtubeview;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Build;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -36,16 +31,23 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.flipkart.youtubeview.fragment.YouTubeBaseFragment;
 import com.flipkart.youtubeview.fragment.YouTubeFragment;
 import com.flipkart.youtubeview.fragment.YouTubeWebViewFragment;
+import com.flipkart.youtubeview.interfaces.InitViewVariables;
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.ImageLoader;
 import com.flipkart.youtubeview.models.YouTubePlayerType;
 import com.flipkart.youtubeview.util.$Precondition$Check;
 import com.flipkart.youtubeview.util.ServiceUtil;
 
-public class YouTubePlayerView extends FrameLayout {
+public class YouTubePlayerView extends FrameLayout implements InitViewVariables {
 
     public static final String TAG = "YouTubeFragmentTAG";
     private static final double ASPECT_RATIO = 0.5625; //aspect ratio of player 9:16(height/width)
@@ -127,7 +129,6 @@ public class YouTubePlayerView extends FrameLayout {
         playerContainer.setId(0);
         thumbnailImageView = itemView.findViewById(R.id.video_thumbnail_image);
         playIcon = itemView.findViewById(R.id.play_btn);
-
         ProgressBar progressBar = itemView.findViewById(R.id.recycler_progressbar);
         // For else case there is a layout defined for v21 and above
         if (progressBar != null && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -232,5 +233,14 @@ public class YouTubePlayerView extends FrameLayout {
     protected void onDetachedFromWindow() {
         unbindPlayer();
         super.onDetachedFromWindow();
+    }
+
+    /*
+    this function helps to configure the play icon image
+     */
+    @Override
+    public void setPlayIconSrc(int src) {
+        if (playIcon != null)
+            playIcon.setImageResource(src);
     }
 }
