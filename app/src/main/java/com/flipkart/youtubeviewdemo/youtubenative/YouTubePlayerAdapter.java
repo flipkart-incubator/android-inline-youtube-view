@@ -77,6 +77,13 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         String videoId = videoIds.get(position);
 
         playerView.initPlayer(Constants.API_KEY, videoId, "https://cdn.rawgit.com/flipkart-incubator/inline-youtube-view/60bae1a1/youtube-android/youtube_iframe_player.html", playerType, null, fragment, imageLoader);
+        /*if you want to have your custom icon instead of default icon. Use the below code
+            and add your own image as below. Make sure to call below method after initPlayer
+         */
+        //playerView.overridePlayIcon("https://i.ibb.co/ZKZ2qdc/ic-launcher.png");
+
+        //if you have the resource id then pass it as below
+        //playerView.overridePlayIcon(R.mipmap.ic_launcher);
     }
 
     static class YouTubePlayerViewHolder extends RecyclerView.ViewHolder {
@@ -85,11 +92,6 @@ public class YouTubePlayerAdapter extends RecyclerView.Adapter<YouTubePlayerAdap
         YouTubePlayerViewHolder(View view) {
             super(view);
             playerView = view.findViewById(R.id.youtube_player_view);
-
-            /*if you want to have your custom icon instead of default icon. Use the below code
-            and add your own image as below
-            */
-            //playerView.setPlayIconSrc(R.mipmap.ic_launcher);
         }
     }
 }

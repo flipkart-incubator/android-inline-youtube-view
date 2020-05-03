@@ -31,6 +31,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,14 +41,13 @@ import androidx.fragment.app.FragmentManager;
 import com.flipkart.youtubeview.fragment.YouTubeBaseFragment;
 import com.flipkart.youtubeview.fragment.YouTubeFragment;
 import com.flipkart.youtubeview.fragment.YouTubeWebViewFragment;
-import com.flipkart.youtubeview.interfaces.InitViewVariables;
 import com.flipkart.youtubeview.listener.YouTubeEventListener;
 import com.flipkart.youtubeview.models.ImageLoader;
 import com.flipkart.youtubeview.models.YouTubePlayerType;
 import com.flipkart.youtubeview.util.$Precondition$Check;
 import com.flipkart.youtubeview.util.ServiceUtil;
 
-public class YouTubePlayerView extends FrameLayout implements InitViewVariables {
+public class YouTubePlayerView extends FrameLayout{
 
     public static final String TAG = "YouTubeFragmentTAG";
     private static final double ASPECT_RATIO = 0.5625; //aspect ratio of player 9:16(height/width)
@@ -237,10 +237,26 @@ public class YouTubePlayerView extends FrameLayout implements InitViewVariables 
 
     /*
     this function helps to configure the play icon image
+    @param resId the resource identifier of the drawable
      */
-    @Override
-    public void setPlayIconSrc(int src) {
+    public void overridePlayIcon(@DrawableRes int src) {
         if (playIcon != null)
             playIcon.setImageResource(src);
     }
+
+    /*
+    this function helps to configure the play icon image
+    @param imageUrl the resource identifier of the drawable
+     */
+    public void overridePlayIcon(@NonNull String url) {
+        $Precondition$Check.checkArgument(!TextUtils.isEmpty(url), "Image Url cannot be null");
+        $Precondition$Check.checkArgument(!(imageLoader == null),
+                "Image loader cannot be null. Make sure you have called initPlayer method");
+        // override play icon
+        if (playIcon != null) {
+            int playIconDimen = (int) getContext().getResources().getDimension(R.dimen.play_icon_dimensions);
+            imageLoader.loadImage(playIcon, url, playIconDimen, playIconDimen);
+        }
+    }
+
 }
