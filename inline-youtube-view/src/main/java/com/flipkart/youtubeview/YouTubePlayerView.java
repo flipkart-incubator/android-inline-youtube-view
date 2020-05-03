@@ -47,7 +47,7 @@ import com.flipkart.youtubeview.models.YouTubePlayerType;
 import com.flipkart.youtubeview.util.$Precondition$Check;
 import com.flipkart.youtubeview.util.ServiceUtil;
 
-public class YouTubePlayerView extends FrameLayout{
+public class YouTubePlayerView extends FrameLayout {
 
     public static final String TAG = "YouTubeFragmentTAG";
     private static final double ASPECT_RATIO = 0.5625; //aspect ratio of player 9:16(height/width)
@@ -236,17 +236,20 @@ public class YouTubePlayerView extends FrameLayout{
     }
 
     /**
-    this function helps to configure the play icon image
-    @param resId the resource identifier of the drawable
+     * this function helps to configure the play icon image
+     *
+     * @param resId the resource identifier of the drawable
      **/
     public void overridePlayIcon(@DrawableRes int src) {
-        if (playIcon != null)
+        if (playIcon != null) {
             playIcon.setImageResource(src);
+        }
     }
 
     /**
-    this function helps to configure the play icon image
-    @param imageUrl the resource identifier of the drawable
+     * this function helps to configure the play icon image
+     *
+     * @param imageUrl the resource identifier of the drawable
      **/
     public void overridePlayIcon(@NonNull String url) {
         $Precondition$Check.checkArgument(!TextUtils.isEmpty(url), "Image Url cannot be null");
