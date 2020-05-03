@@ -235,19 +235,19 @@ public class YouTubePlayerView extends FrameLayout{
         super.onDetachedFromWindow();
     }
 
-    /*
+    /**
     this function helps to configure the play icon image
     @param resId the resource identifier of the drawable
-     */
+     **/
     public void overridePlayIcon(@DrawableRes int src) {
         if (playIcon != null)
             playIcon.setImageResource(src);
     }
 
-    /*
+    /**
     this function helps to configure the play icon image
     @param imageUrl the resource identifier of the drawable
-     */
+     **/
     public void overridePlayIcon(@NonNull String url) {
         $Precondition$Check.checkArgument(!TextUtils.isEmpty(url), "Image Url cannot be null");
         $Precondition$Check.checkArgument(!(imageLoader == null),
